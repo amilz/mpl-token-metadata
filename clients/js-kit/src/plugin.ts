@@ -85,7 +85,7 @@ export function mplTokenMetadataProgram() {
   return <T extends MplTokenMetadataPluginRequirements>(client: T) => {
     return pipe(client, generatedMplTokenMetadataProgram(), (c) => ({
       ...c,
-      mplTokenMetadata: <MplTokenMetadataPlugin>{
+      mplTokenMetadata: {
         ...c.mplTokenMetadata,
         instructions: {
           ...c.mplTokenMetadata.instructions,
@@ -111,15 +111,15 @@ export function mplTokenMetadataProgram() {
               )
             ),
         },
-        fetchDigitalAsset: (mint, config) => fetchDigitalAsset(client.rpc, mint, config),
-        fetchDigitalAssetByMetadata: (metadataAddress, config) =>
+        fetchDigitalAsset: (mint, config?) => fetchDigitalAsset(client.rpc, mint, config),
+        fetchDigitalAssetByMetadata: (metadataAddress, config?) =>
           fetchDigitalAssetByMetadata(client.rpc, metadataAddress, config),
-        fetchAllDigitalAsset: (mints, config) => fetchAllDigitalAsset(client.rpc, mints, config),
-        fetchDigitalAssetWithToken: (mint, token, config) =>
+        fetchAllDigitalAsset: (mints, config?) => fetchAllDigitalAsset(client.rpc, mints, config),
+        fetchDigitalAssetWithToken: (mint, token, config?) =>
           fetchDigitalAssetWithToken(client.rpc, mint, token, config),
-        fetchDigitalAssetWithAssociatedToken: (mint, owner, config) =>
+        fetchDigitalAssetWithAssociatedToken: (mint, owner, config?) =>
           fetchDigitalAssetWithAssociatedToken(client.rpc, mint, owner, config),
-      },
+      } satisfies MplTokenMetadataPlugin,
     }));
   };
 }
