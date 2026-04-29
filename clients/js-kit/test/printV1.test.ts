@@ -11,16 +11,14 @@
  */
 
 import test from 'ava';
+import { getSetComputeUnitLimitInstruction } from '@solana-program/compute-budget';
 import { TokenStandard, PrintSupply } from '../src/generated/types';
 import {
   getCreateV1InstructionAsync,
   getMintV1InstructionAsync,
   getPrintV1InstructionAsync,
 } from '../src/generated/instructions';
-import {
-  findMetadataPda,
-  findMasterEditionPda,
-} from '../src/generated/pdas';
+import { findMetadataPda, findMasterEditionPda } from '../src/generated/pdas';
 import { findAssociatedTokenPda } from './_setup';
 import { fetchMetadata, fetchMasterEdition } from '../src/generated/accounts';
 import {
@@ -195,7 +193,12 @@ test('it can print a new edition from a ProgrammableNonFungible', async (t) => {
     updateAuthority: masterOwner.address,
   });
 
-  await sendAndConfirm(rpc, rpcSubscriptions, printIx, [editionMint, editionOwner, masterOwner]);
+  await sendAndConfirmInstructions(
+    rpc,
+    rpcSubscriptions,
+    [getSetComputeUnitLimitInstruction({ units: 400_000 }), printIx],
+    [editionMint, editionOwner, masterOwner]
+  );
 
   // Verify the master edition supply was incremented
   const [masterEditionAddress] = await findMasterEditionPda({

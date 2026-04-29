@@ -13,6 +13,9 @@ devDependencies:
   '@ava/typescript':
     specifier: ^3.0.1
     version: 3.0.1
+  '@solana-program/compute-budget':
+    specifier: ^0.15.0
+    version: 0.15.0(@solana/kit@6.8.0)
   '@solana-program/system':
     specifier: ^0.12.0
     version: 0.12.0(@solana/kit@6.8.0)
@@ -2295,6 +2298,14 @@ packages:
   /@sindresorhus/is@4.6.0:
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
     engines: {node: '>=10'}
+    dev: true
+
+  /@solana-program/compute-budget@0.15.0(@solana/kit@6.8.0):
+    resolution: {integrity: sha512-toejNdIkzpUTqLSIzP0Nofr/EFel8QpPWuTtIKzfCcjn+mXpkThHxPJaNesk251rSTiWaxDZ3WxG7RxYwTWTqA==}
+    peerDependencies:
+      '@solana/kit': ^6.3.0
+    dependencies:
+      '@solana/kit': 6.8.0(typescript@5.9.3)
     dev: true
 
   /@solana-program/system@0.12.0(@solana/kit@6.8.0):
