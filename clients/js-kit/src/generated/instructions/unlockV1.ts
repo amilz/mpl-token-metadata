@@ -64,7 +64,7 @@ import {
 
 export const UNLOCK_V1_DISCRIMINATOR = 47;
 
-export function getUnlockV1DiscriminatorBytes() {
+export function getUnlockV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UNLOCK_V1_DISCRIMINATOR);
 }
 

@@ -46,6 +46,7 @@ import {
   type MaybeEncodedAccount,
   type Option,
   type OptionOrNullable,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import { findMetadataPda, MetadataSeeds } from '../pdas';
 import {
@@ -78,9 +79,9 @@ import {
   type UsesArgs,
 } from '../types';
 
-export const METADATA_KEY = Key.MetadataV1;
+export const METADATA_KEY: Key = Key.MetadataV1;
 
-export function getMetadataKeyBytes() {
+export function getMetadataKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(METADATA_KEY);
 }
 

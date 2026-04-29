@@ -37,7 +37,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const SIGN_METADATA_DISCRIMINATOR = 7;
 
-export function getSignMetadataDiscriminatorBytes() {
+export function getSignMetadataDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(SIGN_METADATA_DISCRIMINATOR);
 }
 

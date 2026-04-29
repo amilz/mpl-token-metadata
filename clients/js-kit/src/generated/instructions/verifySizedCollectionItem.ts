@@ -39,7 +39,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const VERIFY_SIZED_COLLECTION_ITEM_DISCRIMINATOR = 30;
 
-export function getVerifySizedCollectionItemDiscriminatorBytes() {
+export function getVerifySizedCollectionItemDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(VERIFY_SIZED_COLLECTION_ITEM_DISCRIMINATOR);
 }
 

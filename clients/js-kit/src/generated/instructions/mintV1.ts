@@ -67,7 +67,7 @@ import {
 
 export const MINT_V1_DISCRIMINATOR = 43;
 
-export function getMintV1DiscriminatorBytes() {
+export function getMintV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(MINT_V1_DISCRIMINATOR);
 }
 

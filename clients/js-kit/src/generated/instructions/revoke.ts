@@ -50,7 +50,7 @@ import {
 
 export const REVOKE_DISCRIMINATOR = 45;
 
-export function getRevokeDiscriminatorBytes() {
+export function getRevokeDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REVOKE_DISCRIMINATOR);
 }
 

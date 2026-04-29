@@ -9,6 +9,7 @@
 import {
   assertIsInstructionWithAccounts,
   containsBytes,
+  extendClient,
   getU8Encoder,
   SOLANA_ERROR__PROGRAM_CLIENTS__FAILED_TO_IDENTIFY_ACCOUNT,
   SOLANA_ERROR__PROGRAM_CLIENTS__FAILED_TO_IDENTIFY_INSTRUCTION,
@@ -2154,9 +2155,12 @@ export type MplTokenMetadataPluginRequirements = ClientWithRpc<
   ClientWithTransactionSending;
 
 export function mplTokenMetadataProgram() {
-  return <T extends MplTokenMetadataPluginRequirements>(client: T) => {
-    return {
-      ...client,
+  return <T extends MplTokenMetadataPluginRequirements>(
+    client: T
+  ): Omit<T, 'mplTokenMetadata'> & {
+    mplTokenMetadata: MplTokenMetadataPlugin;
+  } => {
+    return extendClient(client, {
       mplTokenMetadata: <MplTokenMetadataPlugin>{
         accounts: {
           collectionAuthorityRecord: addSelfFetchFunctions(
@@ -2521,7 +2525,7 @@ export function mplTokenMetadataProgram() {
           useAuthorityRecord: findUseAuthorityRecordPda,
         },
       },
-    };
+    });
   };
 }
 

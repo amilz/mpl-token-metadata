@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const THAW_DELEGATED_ACCOUNT_DISCRIMINATOR = 27;
 
-export function getThawDelegatedAccountDiscriminatorBytes() {
+export function getThawDelegatedAccountDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(THAW_DELEGATED_ACCOUNT_DISCRIMINATOR);
 }
 

@@ -3,7 +3,12 @@
  * These are called by the generated instruction builders to compute default values
  */
 
-import type { Address, OptionOrNullable, TransactionSigner, ProgramDerivedAddress } from '@solana/kit';
+import type {
+  Address,
+  OptionOrNullable,
+  TransactionSigner,
+  ProgramDerivedAddress,
+} from '@solana/kit';
 import type { ResolvedInstructionAccount } from '@solana/program-client-core';
 import type { TokenStandard } from '../generated/types/tokenStandard';
 import type { CollectionDetailsArgs } from '../generated/types/collectionDetails';
@@ -35,7 +40,7 @@ export function isNonFungible(tokenStandard: TokenStandard): boolean {
   return (
     tokenStandard === 0 || // TokenStandard.NonFungible
     tokenStandard === 3 || // TokenStandard.NonFungibleEdition
-    tokenStandard === 4    // TokenStandard.ProgrammableNonFungible
+    tokenStandard === 4 // TokenStandard.ProgrammableNonFungible
   );
 }
 
@@ -92,9 +97,7 @@ export function resolveCollectionDetails(
 /**
  * Check if token standard is non-fungible
  */
-export function resolveIsNonFungible(
-  scope: ResolverScope<TokenStandardArgs>
-): boolean {
+export function resolveIsNonFungible(scope: ResolverScope<TokenStandardArgs>): boolean {
   if (scope.args.tokenStandard === undefined) {
     throw new Error('tokenStandard is required');
   }
@@ -104,9 +107,7 @@ export function resolveIsNonFungible(
 /**
  * Resolve decimals based on token standard
  */
-export function resolveDecimals(
-  scope: ResolverScope<TokenStandardArgs>
-): OptionOrNullable<number> {
+export function resolveDecimals(scope: ResolverScope<TokenStandardArgs>): OptionOrNullable<number> {
   if (scope.args.tokenStandard === undefined) {
     throw new Error('tokenStandard is required');
   }
@@ -122,17 +123,13 @@ export function resolvePrintSupply(
   if (scope.args.tokenStandard === undefined) {
     throw new Error('tokenStandard is required');
   }
-  return isNonFungible(scope.args.tokenStandard)
-    ? { __kind: 'Zero' }
-    : null;
+  return isNonFungible(scope.args.tokenStandard) ? { __kind: 'Zero' } : null;
 }
 
 /**
  * Resolve creators from authority account
  */
-export function resolveCreators(
-  scope: ResolverScope<unknown>
-): OptionOrNullable<CreatorArgs[]> {
+export function resolveCreators(scope: ResolverScope<unknown>): OptionOrNullable<CreatorArgs[]> {
   const authorityAddress = getAddressFromAccount(scope.accounts.authority?.value);
   if (!authorityAddress) {
     throw new Error('authority account is required');
@@ -149,9 +146,7 @@ export function resolveCreators(
 /**
  * Calculate byte delta for CreateV1 instruction
  */
-export function resolveCreateV1Bytes(
-  scope: ResolverScope<TokenStandardArgs>
-): number {
+export function resolveCreateV1Bytes(scope: ResolverScope<TokenStandardArgs>): number {
   const base = MINT_SIZE + METADATA_SIZE + 2 * ACCOUNT_HEADER_SIZE;
   if (scope.args.tokenStandard !== undefined && isNonFungible(scope.args.tokenStandard)) {
     return base + MASTER_EDITION_SIZE + ACCOUNT_HEADER_SIZE;
@@ -163,9 +158,9 @@ export function resolveCreateV1Bytes(
  * Resolve optional token owner
  * Returns the authority's address as the default token owner
  */
-export function resolveOptionalTokenOwner(
-  scope: ResolverScope<unknown>
-): { value: Address | null } {
+export function resolveOptionalTokenOwner(scope: ResolverScope<unknown>): {
+  value: Address | null;
+} {
   // If token is provided, return null (owner will be derived from token account)
   // Otherwise, use the authority's address as the owner
   const authorityAddress = getAddressFromAccount(scope.accounts.authority?.value);

@@ -55,7 +55,7 @@ import {
 
 export const DELEGATE_PRINT_DELEGATE_V1_DISCRIMINATOR = 44;
 
-export function getDelegatePrintDelegateV1DiscriminatorBytes() {
+export function getDelegatePrintDelegateV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(DELEGATE_PRINT_DELEGATE_V1_DISCRIMINATOR);
 }
 

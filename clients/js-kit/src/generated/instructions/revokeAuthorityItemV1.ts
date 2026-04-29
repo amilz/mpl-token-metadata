@@ -48,7 +48,7 @@ import { MetadataDelegateRole, type TokenStandardArgs } from '../types';
 
 export const REVOKE_AUTHORITY_ITEM_V1_DISCRIMINATOR = 45;
 
-export function getRevokeAuthorityItemV1DiscriminatorBytes() {
+export function getRevokeAuthorityItemV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REVOKE_AUTHORITY_ITEM_V1_DISCRIMINATOR);
 }
 

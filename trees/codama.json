@@ -1,7 +1,7 @@
 {
   "kind": "rootNode",
   "standard": "codama",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "program": {
     "kind": "programNode",
     "name": "mplTokenMetadata",
@@ -31402,6 +31402,7 @@
         ]
       }
     ],
+    "events": [],
     "errors": [
       {
         "kind": "errorNode",

@@ -62,7 +62,7 @@ import {
 
 export const DELEGATE_TRANSFER_V1_DISCRIMINATOR = 44;
 
-export function getDelegateTransferV1DiscriminatorBytes() {
+export function getDelegateTransferV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(DELEGATE_TRANSFER_V1_DISCRIMINATOR);
 }
 

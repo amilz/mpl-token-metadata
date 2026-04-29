@@ -41,7 +41,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const CREATE_ESCROW_ACCOUNT_DISCRIMINATOR = 38;
 
-export function getCreateEscrowAccountDiscriminatorBytes() {
+export function getCreateEscrowAccountDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(CREATE_ESCROW_ACCOUNT_DISCRIMINATOR);
 }
 

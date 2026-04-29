@@ -97,7 +97,7 @@ import {
 
 export const CREATE_V1_DISCRIMINATOR = 42;
 
-export function getCreateV1DiscriminatorBytes() {
+export function getCreateV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(CREATE_V1_DISCRIMINATOR);
 }
 

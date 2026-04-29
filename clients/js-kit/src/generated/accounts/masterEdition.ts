@@ -32,13 +32,14 @@ import {
   type MaybeEncodedAccount,
   type Option,
   type OptionOrNullable,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import { findMasterEditionPda, MasterEditionSeeds } from '../pdas';
 import { getKeyDecoder, getKeyEncoder, Key } from '../types';
 
-export const MASTER_EDITION_KEY = Key.MasterEditionV2;
+export const MASTER_EDITION_KEY: Key = Key.MasterEditionV2;
 
-export function getMasterEditionKeyBytes() {
+export function getMasterEditionKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(MASTER_EDITION_KEY);
 }
 

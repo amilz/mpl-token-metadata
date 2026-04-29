@@ -30,6 +30,7 @@ import {
   type FetchAccountsConfig,
   type MaybeAccount,
   type MaybeEncodedAccount,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import {
   getEscrowAuthorityDecoder,
@@ -41,9 +42,9 @@ import {
   type EscrowAuthorityArgs,
 } from '../types';
 
-export const TOKEN_OWNED_ESCROW_KEY = Key.TokenOwnedEscrow;
+export const TOKEN_OWNED_ESCROW_KEY: Key = Key.TokenOwnedEscrow;
 
-export function getTokenOwnedEscrowKeyBytes() {
+export function getTokenOwnedEscrowKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(TOKEN_OWNED_ESCROW_KEY);
 }
 

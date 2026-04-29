@@ -37,7 +37,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const REMOVE_CREATOR_VERIFICATION_DISCRIMINATOR = 28;
 
-export function getRemoveCreatorVerificationDiscriminatorBytes() {
+export function getRemoveCreatorVerificationDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REMOVE_CREATOR_VERIFICATION_DISCRIMINATOR);
 }
 

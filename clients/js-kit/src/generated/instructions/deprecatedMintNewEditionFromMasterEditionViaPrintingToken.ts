@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const DEPRECATED_MINT_NEW_EDITION_FROM_MASTER_EDITION_VIA_PRINTING_TOKEN_DISCRIMINATOR = 3;
 
-export function getDeprecatedMintNewEditionFromMasterEditionViaPrintingTokenDiscriminatorBytes() {
+export function getDeprecatedMintNewEditionFromMasterEditionViaPrintingTokenDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     DEPRECATED_MINT_NEW_EDITION_FROM_MASTER_EDITION_VIA_PRINTING_TOKEN_DISCRIMINATOR
   );

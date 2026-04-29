@@ -36,6 +36,7 @@ import {
   type MaybeEncodedAccount,
   type Option,
   type OptionOrNullable,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import { findTokenRecordPda, TokenRecordSeeds } from '../pdas';
 import {
@@ -52,9 +53,9 @@ import {
   type TokenStateArgs,
 } from '../types';
 
-export const TOKEN_RECORD_KEY = Key.TokenRecord;
+export const TOKEN_RECORD_KEY: Key = Key.TokenRecord;
 
-export function getTokenRecordKeyBytes() {
+export function getTokenRecordKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(TOKEN_RECORD_KEY);
 }
 

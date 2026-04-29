@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const REVOKE_COLLECTION_AUTHORITY_DISCRIMINATOR = 24;
 
-export function getRevokeCollectionAuthorityDiscriminatorBytes() {
+export function getRevokeCollectionAuthorityDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REVOKE_COLLECTION_AUTHORITY_DISCRIMINATOR);
 }
 

@@ -30,13 +30,14 @@ import {
   type FixedSizeEncoder,
   type MaybeAccount,
   type MaybeEncodedAccount,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import { findUseAuthorityRecordPda, UseAuthorityRecordSeeds } from '../pdas';
 import { getKeyDecoder, getKeyEncoder, Key } from '../types';
 
-export const USE_AUTHORITY_RECORD_KEY = Key.UseAuthorityRecord;
+export const USE_AUTHORITY_RECORD_KEY: Key = Key.UseAuthorityRecord;
 
-export function getUseAuthorityRecordKeyBytes() {
+export function getUseAuthorityRecordKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(USE_AUTHORITY_RECORD_KEY);
 }
 

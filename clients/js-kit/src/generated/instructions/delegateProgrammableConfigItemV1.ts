@@ -60,7 +60,7 @@ import {
 
 export const DELEGATE_PROGRAMMABLE_CONFIG_ITEM_V1_DISCRIMINATOR = 44;
 
-export function getDelegateProgrammableConfigItemV1DiscriminatorBytes() {
+export function getDelegateProgrammableConfigItemV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     DELEGATE_PROGRAMMABLE_CONFIG_ITEM_V1_DISCRIMINATOR
   );

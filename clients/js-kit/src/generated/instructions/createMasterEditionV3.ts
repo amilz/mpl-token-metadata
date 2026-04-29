@@ -47,7 +47,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const CREATE_MASTER_EDITION_V3_DISCRIMINATOR = 17;
 
-export function getCreateMasterEditionV3DiscriminatorBytes() {
+export function getCreateMasterEditionV3DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(CREATE_MASTER_EDITION_V3_DISCRIMINATOR);
 }
 

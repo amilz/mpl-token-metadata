@@ -80,7 +80,7 @@ import {
 
 export const UPDATE_V1_DISCRIMINATOR = 50;
 
-export function getUpdateV1DiscriminatorBytes() {
+export function getUpdateV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UPDATE_V1_DISCRIMINATOR);
 }
 

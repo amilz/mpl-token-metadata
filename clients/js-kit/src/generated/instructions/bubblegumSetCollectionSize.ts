@@ -44,7 +44,7 @@ import {
 
 export const BUBBLEGUM_SET_COLLECTION_SIZE_DISCRIMINATOR = 36;
 
-export function getBubblegumSetCollectionSizeDiscriminatorBytes() {
+export function getBubblegumSetCollectionSizeDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(BUBBLEGUM_SET_COLLECTION_SIZE_DISCRIMINATOR);
 }
 

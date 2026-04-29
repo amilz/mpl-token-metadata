@@ -45,7 +45,7 @@ import {
 
 export const MINT_NEW_EDITION_FROM_MASTER_EDITION_VIA_VAULT_PROXY_DISCRIMINATOR = 13;
 
-export function getMintNewEditionFromMasterEditionViaVaultProxyDiscriminatorBytes() {
+export function getMintNewEditionFromMasterEditionViaVaultProxyDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     MINT_NEW_EDITION_FROM_MASTER_EDITION_VIA_VAULT_PROXY_DISCRIMINATOR
   );

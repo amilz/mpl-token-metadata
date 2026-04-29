@@ -50,7 +50,7 @@ import { type TokenStandardArgs } from '../types';
 
 export const DELEGATE_STANDARD_V1_DISCRIMINATOR = 44;
 
-export function getDelegateStandardV1DiscriminatorBytes() {
+export function getDelegateStandardV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(DELEGATE_STANDARD_V1_DISCRIMINATOR);
 }
 

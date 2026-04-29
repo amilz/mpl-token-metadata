@@ -54,7 +54,7 @@ import {
 
 export const BURN_DISCRIMINATOR = 41;
 
-export function getBurnDiscriminatorBytes() {
+export function getBurnDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(BURN_DISCRIMINATOR);
 }
 

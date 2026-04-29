@@ -64,7 +64,7 @@ import {
 
 export const DELEGATE_LOCKED_TRANSFER_V1_DISCRIMINATOR = 44;
 
-export function getDelegateLockedTransferV1DiscriminatorBytes() {
+export function getDelegateLockedTransferV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(DELEGATE_LOCKED_TRANSFER_V1_DISCRIMINATOR);
 }
 

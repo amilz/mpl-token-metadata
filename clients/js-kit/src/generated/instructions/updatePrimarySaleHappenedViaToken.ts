@@ -38,7 +38,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const UPDATE_PRIMARY_SALE_HAPPENED_VIA_TOKEN_DISCRIMINATOR = 4;
 
-export function getUpdatePrimarySaleHappenedViaTokenDiscriminatorBytes() {
+export function getUpdatePrimarySaleHappenedViaTokenDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     UPDATE_PRIMARY_SALE_HAPPENED_VIA_TOKEN_DISCRIMINATOR
   );

@@ -629,7 +629,7 @@ export type MplTokenMetadataError =
 let mplTokenMetadataErrorMessages:
   | Record<MplTokenMetadataError, string>
   | undefined;
-if (process.env.NODE_ENV !== 'production') {
+if (process.env['NODE_ENV'] !== 'production') {
   mplTokenMetadataErrorMessages = {
     [MPL_TOKEN_METADATA_ERROR__ACCOUNT_ALREADY_RESIZED]: `Account has already been resized`,
     [MPL_TOKEN_METADATA_ERROR__ADDRESS_NOT_IN_RESERVATION]: ``,
@@ -840,7 +840,7 @@ if (process.env.NODE_ENV !== 'production') {
 export function getMplTokenMetadataErrorMessage(
   code: MplTokenMetadataError
 ): string {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env['NODE_ENV'] !== 'production') {
     return (
       mplTokenMetadataErrorMessages as Record<MplTokenMetadataError, string>
     )[code];

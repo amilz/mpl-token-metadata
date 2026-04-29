@@ -42,7 +42,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const UTILIZE_DISCRIMINATOR = 19;
 
-export function getUtilizeDiscriminatorBytes() {
+export function getUtilizeDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UTILIZE_DISCRIMINATOR);
 }
 

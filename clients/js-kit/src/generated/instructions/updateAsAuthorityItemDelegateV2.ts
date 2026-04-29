@@ -62,7 +62,7 @@ import {
 
 export const UPDATE_AS_AUTHORITY_ITEM_DELEGATE_V2_DISCRIMINATOR = 50;
 
-export function getUpdateAsAuthorityItemDelegateV2DiscriminatorBytes() {
+export function getUpdateAsAuthorityItemDelegateV2DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     UPDATE_AS_AUTHORITY_ITEM_DELEGATE_V2_DISCRIMINATOR
   );

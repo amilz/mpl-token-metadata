@@ -38,7 +38,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const UNVERIFY_CREATOR_V1_DISCRIMINATOR = 53;
 
-export function getUnverifyCreatorV1DiscriminatorBytes() {
+export function getUnverifyCreatorV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UNVERIFY_CREATOR_V1_DISCRIMINATOR);
 }
 

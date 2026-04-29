@@ -58,7 +58,7 @@ import {
 
 export const UPDATE_AS_DATA_DELEGATE_V2_DISCRIMINATOR = 50;
 
-export function getUpdateAsDataDelegateV2DiscriminatorBytes() {
+export function getUpdateAsDataDelegateV2DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UPDATE_AS_DATA_DELEGATE_V2_DISCRIMINATOR);
 }
 

@@ -41,7 +41,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const TRANSFER_OUT_OF_ESCROW_DISCRIMINATOR = 40;
 
-export function getTransferOutOfEscrowDiscriminatorBytes() {
+export function getTransferOutOfEscrowDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(TRANSFER_OUT_OF_ESCROW_DISCRIMINATOR);
 }
 

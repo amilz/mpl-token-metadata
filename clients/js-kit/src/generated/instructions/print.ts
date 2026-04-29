@@ -55,7 +55,7 @@ import {
 
 export const PRINT_DISCRIMINATOR = 55;
 
-export function getPrintDiscriminatorBytes() {
+export function getPrintDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(PRINT_DISCRIMINATOR);
 }
 

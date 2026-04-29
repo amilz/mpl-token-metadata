@@ -57,7 +57,7 @@ import {
 
 export const CREATE_METADATA_ACCOUNT_V3_DISCRIMINATOR = 33;
 
-export function getCreateMetadataAccountV3DiscriminatorBytes() {
+export function getCreateMetadataAccountV3DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(CREATE_METADATA_ACCOUNT_V3_DISCRIMINATOR);
 }
 

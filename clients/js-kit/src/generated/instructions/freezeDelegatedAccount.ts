@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const FREEZE_DELEGATED_ACCOUNT_DISCRIMINATOR = 26;
 
-export function getFreezeDelegatedAccountDiscriminatorBytes() {
+export function getFreezeDelegatedAccountDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(FREEZE_DELEGATED_ACCOUNT_DISCRIMINATOR);
 }
 

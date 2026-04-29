@@ -34,7 +34,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const PUFF_METADATA_DISCRIMINATOR = 14;
 
-export function getPuffMetadataDiscriminatorBytes() {
+export function getPuffMetadataDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(PUFF_METADATA_DISCRIMINATOR);
 }
 

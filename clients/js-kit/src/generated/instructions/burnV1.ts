@@ -49,7 +49,7 @@ import { TokenStandard, type TokenStandardArgs } from '../types';
 
 export const BURN_V1_DISCRIMINATOR = 41;
 
-export function getBurnV1DiscriminatorBytes() {
+export function getBurnV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(BURN_V1_DISCRIMINATOR);
 }
 

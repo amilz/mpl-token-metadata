@@ -37,7 +37,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const COLLECT_DISCRIMINATOR = 54;
 
-export function getCollectDiscriminatorBytes() {
+export function getCollectDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(COLLECT_DISCRIMINATOR);
 }
 

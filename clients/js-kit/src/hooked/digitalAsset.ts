@@ -13,26 +13,12 @@ import type {
   FetchAccountsConfig,
   Rpc,
 } from '@solana/kit';
-import {
-  assertAccountExists,
-  fetchEncodedAccounts,
-  decodeAccount,
-} from '@solana/kit';
+import { assertAccountExists, fetchEncodedAccounts, decodeAccount } from '@solana/kit';
 import type { Mint } from '@solana-program/token';
 import { getMintDecoder } from '@solana-program/token';
-import {
-  fetchMetadata,
-  decodeMetadata,
-  type Metadata,
-} from '../generated/accounts/metadata';
-import {
-  decodeMasterEdition,
-  type MasterEdition,
-} from '../generated/accounts/masterEdition';
-import {
-  decodeEdition,
-  type Edition,
-} from '../generated/accounts/edition';
+import { fetchMetadata, decodeMetadata, type Metadata } from '../generated/accounts/metadata';
+import { decodeMasterEdition, type MasterEdition } from '../generated/accounts/masterEdition';
+import { decodeEdition, type Edition } from '../generated/accounts/edition';
 import { findMetadataPda, findMasterEditionPda } from '../generated/pdas';
 import { Key, getKeyDecoder } from '../generated/types';
 
@@ -47,9 +33,7 @@ export type DigitalAsset<TMint extends string = string> = {
   /** The metadata account data */
   metadata: Metadata;
   /** The edition account data (if present) */
-  edition?:
-    | ({ isOriginal: true } & MasterEdition)
-    | ({ isOriginal: false } & Edition);
+  edition?: ({ isOriginal: true } & MasterEdition) | ({ isOriginal: false } & Edition);
 };
 
 /**
@@ -219,7 +203,7 @@ export function deserializeDigitalAsset<TMint extends string = string>(
 
   // Decode edition account based on its key
   const keyDecoder = getKeyDecoder();
-  const editionKey = keyDecoder.decode(editionAccount.data)[0];
+  const editionKey = keyDecoder.decode(editionAccount.data);
 
   let edition: DigitalAsset<TMint>['edition'];
 

@@ -34,6 +34,7 @@ import {
   type MaybeEncodedAccount,
   type Option,
   type OptionOrNullable,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import {
   CollectionAuthorityRecordSeeds,
@@ -41,9 +42,10 @@ import {
 } from '../pdas';
 import { getKeyDecoder, getKeyEncoder, Key } from '../types';
 
-export const COLLECTION_AUTHORITY_RECORD_KEY = Key.CollectionAuthorityRecord;
+export const COLLECTION_AUTHORITY_RECORD_KEY: Key =
+  Key.CollectionAuthorityRecord;
 
-export function getCollectionAuthorityRecordKeyBytes() {
+export function getCollectionAuthorityRecordKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(COLLECTION_AUTHORITY_RECORD_KEY);
 }
 

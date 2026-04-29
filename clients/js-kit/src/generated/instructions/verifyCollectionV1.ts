@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const VERIFY_COLLECTION_V1_DISCRIMINATOR = 52;
 
-export function getVerifyCollectionV1DiscriminatorBytes() {
+export function getVerifyCollectionV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(VERIFY_COLLECTION_V1_DISCRIMINATOR);
 }
 

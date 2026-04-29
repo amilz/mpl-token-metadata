@@ -45,7 +45,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const MIGRATE_DISCRIMINATOR = 48;
 
-export function getMigrateDiscriminatorBytes() {
+export function getMigrateDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(MIGRATE_DISCRIMINATOR);
 }
 

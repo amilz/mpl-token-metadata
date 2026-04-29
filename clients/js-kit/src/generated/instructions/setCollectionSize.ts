@@ -44,7 +44,7 @@ import {
 
 export const SET_COLLECTION_SIZE_DISCRIMINATOR = 34;
 
-export function getSetCollectionSizeDiscriminatorBytes() {
+export function getSetCollectionSizeDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(SET_COLLECTION_SIZE_DISCRIMINATOR);
 }
 

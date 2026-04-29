@@ -59,7 +59,7 @@ import {
 
 export const LOCK_DISCRIMINATOR = 46;
 
-export function getLockDiscriminatorBytes() {
+export function getLockDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(LOCK_DISCRIMINATOR);
 }
 

@@ -62,7 +62,7 @@ import {
 
 export const DELEGATE_STAKING_V1_DISCRIMINATOR = 44;
 
-export function getDelegateStakingV1DiscriminatorBytes() {
+export function getDelegateStakingV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(DELEGATE_STAKING_V1_DISCRIMINATOR);
 }
 

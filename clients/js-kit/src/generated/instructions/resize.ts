@@ -41,7 +41,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const RESIZE_DISCRIMINATOR = 56;
 
-export function getResizeDiscriminatorBytes() {
+export function getResizeDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(RESIZE_DISCRIMINATOR);
 }
 

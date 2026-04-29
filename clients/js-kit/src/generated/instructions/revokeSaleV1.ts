@@ -48,7 +48,7 @@ import { TokenStandard, type TokenStandardArgs } from '../types';
 
 export const REVOKE_SALE_V1_DISCRIMINATOR = 45;
 
-export function getRevokeSaleV1DiscriminatorBytes() {
+export function getRevokeSaleV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REVOKE_SALE_V1_DISCRIMINATOR);
 }
 

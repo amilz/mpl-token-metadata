@@ -59,7 +59,7 @@ import {
 
 export const UPDATE_AS_COLLECTION_DELEGATE_V2_DISCRIMINATOR = 50;
 
-export function getUpdateAsCollectionDelegateV2DiscriminatorBytes() {
+export function getUpdateAsCollectionDelegateV2DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UPDATE_AS_COLLECTION_DELEGATE_V2_DISCRIMINATOR);
 }
 

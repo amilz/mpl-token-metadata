@@ -59,7 +59,7 @@ import {
 
 export const UPDATE_AS_PROGRAMMABLE_CONFIG_ITEM_DELEGATE_V2_DISCRIMINATOR = 50;
 
-export function getUpdateAsProgrammableConfigItemDelegateV2DiscriminatorBytes() {
+export function getUpdateAsProgrammableConfigItemDelegateV2DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     UPDATE_AS_PROGRAMMABLE_CONFIG_ITEM_DELEGATE_V2_DISCRIMINATOR
   );

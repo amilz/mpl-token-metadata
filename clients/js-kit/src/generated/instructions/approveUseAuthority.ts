@@ -42,7 +42,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const APPROVE_USE_AUTHORITY_DISCRIMINATOR = 20;
 
-export function getApproveUseAuthorityDiscriminatorBytes() {
+export function getApproveUseAuthorityDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(APPROVE_USE_AUTHORITY_DISCRIMINATOR);
 }
 

@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const BURN_NFT_DISCRIMINATOR = 29;
 
-export function getBurnNftDiscriminatorBytes() {
+export function getBurnNftDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(BURN_NFT_DISCRIMINATOR);
 }
 

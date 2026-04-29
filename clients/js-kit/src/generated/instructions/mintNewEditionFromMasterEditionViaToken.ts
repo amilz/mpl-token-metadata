@@ -45,7 +45,7 @@ import {
 
 export const MINT_NEW_EDITION_FROM_MASTER_EDITION_VIA_TOKEN_DISCRIMINATOR = 11;
 
-export function getMintNewEditionFromMasterEditionViaTokenDiscriminatorBytes() {
+export function getMintNewEditionFromMasterEditionViaTokenDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     MINT_NEW_EDITION_FROM_MASTER_EDITION_VIA_TOKEN_DISCRIMINATOR
   );

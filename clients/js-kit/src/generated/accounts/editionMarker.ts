@@ -35,9 +35,9 @@ import {
 import { EditionMarkerSeeds, findEditionMarkerPda } from '../pdas';
 import { getKeyDecoder, getKeyEncoder, Key } from '../types';
 
-export const EDITION_MARKER_KEY = Key.EditionMarker;
+export const EDITION_MARKER_KEY: Key = Key.EditionMarker;
 
-export function getEditionMarkerKeyBytes() {
+export function getEditionMarkerKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(EDITION_MARKER_KEY);
 }
 

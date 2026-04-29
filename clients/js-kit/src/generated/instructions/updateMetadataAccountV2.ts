@@ -52,7 +52,7 @@ import {
 
 export const UPDATE_METADATA_ACCOUNT_V2_DISCRIMINATOR = 15;
 
-export function getUpdateMetadataAccountV2DiscriminatorBytes() {
+export function getUpdateMetadataAccountV2DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UPDATE_METADATA_ACCOUNT_V2_DISCRIMINATOR);
 }
 

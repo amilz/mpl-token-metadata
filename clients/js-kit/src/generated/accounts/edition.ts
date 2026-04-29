@@ -30,12 +30,13 @@ import {
   type FixedSizeEncoder,
   type MaybeAccount,
   type MaybeEncodedAccount,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import { getKeyDecoder, getKeyEncoder, Key } from '../types';
 
-export const EDITION_KEY = Key.EditionV1;
+export const EDITION_KEY: Key = Key.EditionV1;
 
-export function getEditionKeyBytes() {
+export function getEditionKeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(EDITION_KEY);
 }
 

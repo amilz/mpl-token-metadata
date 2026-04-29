@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const SET_TOKEN_STANDARD_DISCRIMINATOR = 35;
 
-export function getSetTokenStandardDiscriminatorBytes() {
+export function getSetTokenStandardDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(SET_TOKEN_STANDARD_DISCRIMINATOR);
 }
 

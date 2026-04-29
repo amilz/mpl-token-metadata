@@ -44,7 +44,7 @@ import {
 
 export const UNVERIFY_DISCRIMINATOR = 53;
 
-export function getUnverifyDiscriminatorBytes() {
+export function getUnverifyDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(UNVERIFY_DISCRIMINATOR);
 }
 

@@ -39,7 +39,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const CLOSE_ACCOUNTS_DISCRIMINATOR = 57;
 
-export function getCloseAccountsDiscriminatorBytes() {
+export function getCloseAccountsDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(CLOSE_ACCOUNTS_DISCRIMINATOR);
 }
 

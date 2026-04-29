@@ -34,6 +34,7 @@ import {
   type MaybeEncodedAccount,
   type Option,
   type OptionOrNullable,
+  type ReadonlyUint8Array,
 } from '@solana/kit';
 import {
   DeprecatedMasterEditionV1Seeds,
@@ -41,9 +42,9 @@ import {
 } from '../pdas';
 import { getKeyDecoder, getKeyEncoder, Key } from '../types';
 
-export const DEPRECATED_MASTER_EDITION_V1_KEY = Key.MasterEditionV1;
+export const DEPRECATED_MASTER_EDITION_V1_KEY: Key = Key.MasterEditionV1;
 
-export function getDeprecatedMasterEditionV1KeyBytes() {
+export function getDeprecatedMasterEditionV1KeyBytes(): ReadonlyUint8Array {
   return getKeyEncoder().encode(DEPRECATED_MASTER_EDITION_V1_KEY);
 }
 

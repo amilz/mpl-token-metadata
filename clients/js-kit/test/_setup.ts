@@ -3,7 +3,22 @@
  */
 
 import type { Address } from '@solana/kit';
-import { createSolanaRpc, createSolanaRpcSubscriptions, airdropFactory, lamports, type Rpc, type RpcSubscriptions, type SolanaRpcApi, type SolanaRpcSubscriptionsApi } from '@solana/kit';
+import {
+  createClient,
+  createSolanaRpc,
+  createSolanaRpcSubscriptions,
+  airdropFactory,
+  lamports,
+  type Rpc,
+  type RpcSubscriptions,
+  type SolanaRpcApi,
+  type SolanaRpcSubscriptionsApi,
+} from '@solana/kit';
+import { solanaLocalRpc } from '@solana/kit-plugin-rpc';
+import { airdropSigner, generatedSigner } from '@solana/kit-plugin-signer';
+import { systemProgram } from '@solana-program/system';
+import { tokenProgram } from '@solana-program/token';
+import { mplTokenMetadataProgram } from '../src';
 
 // Re-export transaction utilities
 export { sendAndConfirm, sendAndConfirmInstructions } from './_transaction';
@@ -57,6 +72,20 @@ To run these tests:
 
 The validator should be running at ${LOCAL_VALIDATOR_URL}
 `.trim();
+}
+
+/**
+ * Create a localhost client preloaded with the system, token, and mpl-token-metadata
+ * program plugins. Generates and funds a fresh payer.
+ */
+export async function createMplClient() {
+  return createClient()
+    .use(generatedSigner())
+    .use(solanaLocalRpc())
+    .use(airdropSigner(lamports(10_000_000_000n)))
+    .use(systemProgram())
+    .use(tokenProgram())
+    .use(mplTokenMetadataProgram());
 }
 
 export async function airdrop(

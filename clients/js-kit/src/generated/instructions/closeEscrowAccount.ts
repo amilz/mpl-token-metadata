@@ -40,7 +40,7 @@ import { MPL_TOKEN_METADATA_PROGRAM_ADDRESS } from '../programs';
 
 export const CLOSE_ESCROW_ACCOUNT_DISCRIMINATOR = 39;
 
-export function getCloseEscrowAccountDiscriminatorBytes() {
+export function getCloseEscrowAccountDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(CLOSE_ESCROW_ACCOUNT_DISCRIMINATOR);
 }
 

@@ -48,7 +48,7 @@ import { MetadataDelegateRole, type TokenStandardArgs } from '../types';
 
 export const REVOKE_PROGRAMMABLE_CONFIG_ITEM_V1_DISCRIMINATOR = 45;
 
-export function getRevokeProgrammableConfigItemV1DiscriminatorBytes() {
+export function getRevokeProgrammableConfigItemV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(
     REVOKE_PROGRAMMABLE_CONFIG_ITEM_V1_DISCRIMINATOR
   );

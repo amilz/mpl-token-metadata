@@ -44,7 +44,7 @@ import { type TokenStandardArgs } from '../types';
 
 export const REVOKE_PRINT_DELEGATE_V1_DISCRIMINATOR = 45;
 
-export function getRevokePrintDelegateV1DiscriminatorBytes() {
+export function getRevokePrintDelegateV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REVOKE_PRINT_DELEGATE_V1_DISCRIMINATOR);
 }
 

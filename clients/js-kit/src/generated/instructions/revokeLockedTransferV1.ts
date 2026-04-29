@@ -48,7 +48,7 @@ import { TokenStandard, type TokenStandardArgs } from '../types';
 
 export const REVOKE_LOCKED_TRANSFER_V1_DISCRIMINATOR = 45;
 
-export function getRevokeLockedTransferV1DiscriminatorBytes() {
+export function getRevokeLockedTransferV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(REVOKE_LOCKED_TRANSFER_V1_DISCRIMINATOR);
 }
 

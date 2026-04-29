@@ -54,7 +54,7 @@ import { TokenStandard, type TokenStandardArgs } from '../types';
 
 export const PRINT_V1_DISCRIMINATOR = 55;
 
-export function getPrintV1DiscriminatorBytes() {
+export function getPrintV1DiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(PRINT_V1_DISCRIMINATOR);
 }
 

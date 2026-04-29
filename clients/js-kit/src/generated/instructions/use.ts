@@ -46,7 +46,7 @@ import {
 
 export const USE_DISCRIMINATOR = 51;
 
-export function getUseDiscriminatorBytes() {
+export function getUseDiscriminatorBytes(): ReadonlyUint8Array {
   return getU8Encoder().encode(USE_DISCRIMINATOR);
 }
 
