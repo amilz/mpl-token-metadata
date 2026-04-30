@@ -2,7 +2,6 @@ import {
   pipe,
   sequentialInstructionPlan,
   type Address,
-  type ClientWithPayer,
   type FetchAccountConfig,
   type FetchAccountsConfig,
   type InstructionPlan,
@@ -16,13 +15,15 @@ import {
   mplTokenMetadataProgram as generatedMplTokenMetadataProgram,
   type MplTokenMetadataPlugin as GeneratedMplTokenMetadataPlugin,
   type MplTokenMetadataPluginInstructions as GeneratedMplTokenMetadataPluginInstructions,
-  type MplTokenMetadataPluginRequirements as GeneratedMplTokenMetadataPluginRequirements,
+  type MplTokenMetadataPluginRequirements,
 } from './generated';
 import {
   createAndMint,
   createNft,
   createProgrammableNft,
   type CreateAndMintInput,
+  type CreateNftInput,
+  type CreateProgrammableNftInput,
 } from './hooked/createHelpers';
 import {
   fetchAllDigitalAsset,
@@ -37,43 +38,31 @@ import {
 } from './hooked/digitalAssetWithToken';
 
 type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-type CreateNftInput = Parameters<typeof createNft>[0];
-type CreateProgrammableNftInput = Parameters<typeof createProgrammableNft>[0];
-type PlanResult = Promise<InstructionPlan> & SelfPlanAndSendFunctions;
-
-export type MplTokenMetadataPluginRequirements = GeneratedMplTokenMetadataPluginRequirements &
-  ClientWithPayer;
+type PlanResult = PromiseLike<InstructionPlan> & SelfPlanAndSendFunctions;
 
 export type MplTokenMetadataPluginInstructions = GeneratedMplTokenMetadataPluginInstructions & {
-  /** Create a new asset and mint it in one sequential plan. */
   createAndMint: (input: MakeOptional<CreateAndMintInput, 'payer'>) => PlanResult;
-  /** Create and mint a NonFungible NFT (amount=1). */
   createNft: (input: MakeOptional<CreateNftInput, 'payer'>) => PlanResult;
-  /** Create and mint a ProgrammableNonFungible NFT (amount=1). */
   createProgrammableNft: (input: MakeOptional<CreateProgrammableNftInput, 'payer'>) => PlanResult;
 };
 
 export type MplTokenMetadataPlugin = Omit<GeneratedMplTokenMetadataPlugin, 'instructions'> & {
   instructions: MplTokenMetadataPluginInstructions;
-  /** Fetch a digital asset (mint + metadata + edition) by mint address. */
   fetchDigitalAsset: <TMint extends string = string>(
     mint: Address<TMint>,
     config?: FetchAccountConfig
   ) => Promise<DigitalAsset<TMint>>;
-  /** Fetch a digital asset by metadata address. */
   fetchDigitalAssetByMetadata: (
     metadataAddress: Address,
     config?: FetchAccountConfig
   ) => Promise<DigitalAsset>;
-  /** Fetch multiple digital assets by mint addresses. */
   fetchAllDigitalAsset: (mints: Address[], config?: FetchAccountsConfig) => Promise<DigitalAsset[]>;
-  /** Fetch a digital asset together with a specific token account. */
   fetchDigitalAssetWithToken: (
     mint: Address,
     token: Address,
     config?: FetchAccountConfig
   ) => Promise<DigitalAssetWithToken>;
-  /** Fetch a digital asset together with the owner's ATA. */
+  /** Fetches a digital asset together with the owner's associated token account. */
   fetchDigitalAssetWithAssociatedToken: (
     mint: Address,
     owner: Address,
@@ -92,25 +81,26 @@ export function mplTokenMetadataProgram() {
           createAndMint: (input) =>
             addSelfPlanAndSendFunctions(
               client,
-              createAndMint({ payer: client.payer, ...input }).then((ixs) =>
+              createAndMint({ ...input, payer: input.payer ?? client.payer }).then((ixs) =>
                 sequentialInstructionPlan(ixs)
               )
             ),
           createNft: (input) =>
             addSelfPlanAndSendFunctions(
               client,
-              createNft({ payer: client.payer, ...input }).then((ixs) =>
+              createNft({ ...input, payer: input.payer ?? client.payer }).then((ixs) =>
                 sequentialInstructionPlan(ixs)
               )
             ),
           createProgrammableNft: (input) =>
             addSelfPlanAndSendFunctions(
               client,
-              createProgrammableNft({ payer: client.payer, ...input }).then((ixs) =>
+              createProgrammableNft({ ...input, payer: input.payer ?? client.payer }).then((ixs) =>
                 sequentialInstructionPlan(ixs)
               )
             ),
         },
+        // `config?` is load-bearing: `satisfies` does not widen the inferred literal.
         fetchDigitalAsset: (mint, config?) => fetchDigitalAsset(client.rpc, mint, config),
         fetchDigitalAssetByMetadata: (metadataAddress, config?) =>
           fetchDigitalAssetByMetadata(client.rpc, metadataAddress, config),

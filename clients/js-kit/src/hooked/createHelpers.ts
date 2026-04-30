@@ -18,8 +18,13 @@ import { TokenStandard } from '../generated/types';
  * Input for createAndMint helper
  * Combines createV1 and mintV1 parameters
  */
-export type CreateAndMintInput = CreateV1AsyncInput &
-  Omit<MintV1AsyncInput, 'mint' | 'metadata'>;
+export type CreateAndMintInput = CreateV1AsyncInput & Omit<MintV1AsyncInput, 'mint' | 'metadata'>;
+
+/** Input for `createNft` — `tokenStandard` and `amount` are filled in by the helper. */
+export type CreateNftInput = Omit<CreateAndMintInput, 'amount' | 'tokenStandard'>;
+
+/** Input for `createProgrammableNft` — `tokenStandard` and `amount` are filled in by the helper. */
+export type CreateProgrammableNftInput = Omit<CreateAndMintInput, 'amount' | 'tokenStandard'>;
 
 /**
  * Creates and mints a token in one step
@@ -88,9 +93,7 @@ export async function createAndMint(
  * });
  * ```
  */
-export async function createNft(
-  input: Omit<CreateAndMintInput, 'amount' | 'tokenStandard'>
-): Promise<[Instruction, Instruction]> {
+export async function createNft(input: CreateNftInput): Promise<[Instruction, Instruction]> {
   return createAndMint({
     ...input,
     tokenStandard: TokenStandard.NonFungible,
@@ -120,7 +123,7 @@ export async function createNft(
  * ```
  */
 export async function createProgrammableNft(
-  input: Omit<CreateAndMintInput, 'amount' | 'tokenStandard'>
+  input: CreateProgrammableNftInput
 ): Promise<[Instruction, Instruction]> {
   return createAndMint({
     ...input,

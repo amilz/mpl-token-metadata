@@ -79,7 +79,7 @@ The validator should be running at ${LOCAL_VALIDATOR_URL}
  * program plugins. Generates and funds a fresh payer.
  */
 export async function createMplClient() {
-  return createClient()
+  return await createClient()
     .use(generatedSigner())
     .use(solanaLocalRpc())
     .use(airdropSigner(lamports(10_000_000_000n)))

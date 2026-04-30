@@ -6,12 +6,11 @@
 
 export * from './generated';
 
-// Plugin overlay (must be re-exported explicitly so it shadows the generated names).
+// Plugin overlay — explicit named re-exports shadow the generated names.
 export {
   mplTokenMetadataProgram,
   type MplTokenMetadataPlugin,
   type MplTokenMetadataPluginInstructions,
-  type MplTokenMetadataPluginRequirements,
 } from './plugin';
 
 export * from './hooked';

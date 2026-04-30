@@ -188,10 +188,7 @@ test('plugin: fetchAllDigitalAsset batches multiple mints', async (t) => {
       .sendTransaction();
   }
 
-  const assets = await client.mplTokenMetadata.fetchAllDigitalAsset([
-    mint1.address,
-    mint2.address,
-  ]);
+  const assets = await client.mplTokenMetadata.fetchAllDigitalAsset([mint1.address, mint2.address]);
   t.is(assets.length, 2);
   t.is(assets[0].metadata.name, 'Batch NFT 1');
   t.is(assets[1].metadata.name, 'Batch NFT 2');
@@ -297,9 +294,7 @@ test('plugin: raw generated instruction (signMetadata) is wired through overlay'
   const metadata = await client.mplTokenMetadata.accounts.metadata.fetch(metadataPda);
   t.is(metadata.data.creators.__option, 'Some');
   if (metadata.data.creators.__option === 'Some') {
-    const signer = metadata.data.creators.value.find(
-      (c) => c.address === client.payer.address
-    );
+    const signer = metadata.data.creators.value.find((c) => c.address === client.payer.address);
     t.truthy(signer);
     t.is(signer?.verified, true);
   }

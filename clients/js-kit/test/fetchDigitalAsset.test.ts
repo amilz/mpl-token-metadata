@@ -13,10 +13,14 @@
  */
 
 import test from 'ava';
-import { TokenStandard } from '../src/generated/types';
-import { getCreateV1InstructionAsync } from '../src/generated/instructions';
+import { TokenStandard, type PrintSupply } from '../src/generated/types';
+import {
+  getCreateV1InstructionAsync,
+  getMintV1InstructionAsync,
+  getPrintV1InstructionAsync,
+} from '../src/generated/instructions';
 import { findMetadataPda } from '../src/generated/pdas';
-import { SPL_TOKEN_PROGRAM_ADDRESS } from './_setup';
+import { SPL_TOKEN_PROGRAM_ADDRESS, findAssociatedTokenPda } from './_setup';
 import {
   fetchDigitalAsset,
   fetchDigitalAssetByMetadata,
@@ -62,10 +66,7 @@ test('it can fetch a NonFungible digital asset', async (t) => {
     tokenStandard: TokenStandard.NonFungible,
   });
 
-  await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [
-    mint,
-    authority,
-  ]);
+  await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [mint, authority]);
 
   // Fetch the digital asset
   const digitalAsset = await fetchDigitalAsset(rpc, mint.address);
@@ -78,11 +79,9 @@ test('it can fetch a NonFungible digital asset', async (t) => {
   t.is(digitalAsset.metadata.uri, 'https://example.com/nft.json');
   t.is(digitalAsset.metadata.sellerFeeBasisPoints, basisPoints(5.5));
 
-  // Note: Edition data may or may not be present immediately after creation
-  // depending on whether the master edition has been initialized
-  // Just verify the core metadata structure is correct
-
-  t.pass('Successfully fetched NonFungible digital asset');
+  // createV1 with NonFungible always initializes the master edition.
+  t.truthy(digitalAsset.edition);
+  t.is(digitalAsset.edition?.isOriginal, true);
 });
 
 /**
@@ -114,10 +113,7 @@ test('it can fetch a digital asset by metadata address', async (t) => {
     tokenStandard: TokenStandard.NonFungible,
   });
 
-  await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [
-    mint,
-    authority,
-  ]);
+  await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [mint, authority]);
 
   // Get metadata address
   const [metadataAddress] = await findMetadataPda({ mint: mint.address });
@@ -162,10 +158,7 @@ test('it can fetch a Fungible digital asset without edition', async (t) => {
     tokenStandard: TokenStandard.Fungible,
   });
 
-  await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [
-    mint,
-    authority,
-  ]);
+  await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [mint, authority]);
 
   // Fetch the digital asset
   const digitalAsset = await fetchDigitalAsset(rpc, mint.address);
@@ -212,10 +205,7 @@ test('it can fetch multiple digital assets in a batch', async (t) => {
       tokenStandard: TokenStandard.NonFungible,
     });
 
-    await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [
-      mint,
-      authority,
-    ]);
+    await sendAndConfirm(rpc, rpcSubscriptions, createInstruction, [mint, authority]);
   }
 
   // Fetch all three at once
@@ -234,10 +224,8 @@ test('it can fetch multiple digital assets in a batch', async (t) => {
     t.truthy(asset.metadata);
     t.is(asset.metadata.name, `Batch NFT ${index + 1}`);
     t.is(asset.metadata.uri, `https://example.com/batch${index + 1}.json`);
-    // Note: Edition data may or may not be present depending on initialization
+    t.is(asset.edition?.isOriginal, true);
   }
-
-  t.pass('Successfully batch fetched multiple digital assets');
 });
 
 /**
@@ -258,4 +246,67 @@ test('it returns empty array when fetching with no mints', async (t) => {
 
   t.is(digitalAssets.length, 0);
   t.pass('Successfully handled empty mint array');
+});
+
+test('it returns isOriginal:false for a printed edition', async (t) => {
+  const canRun = await canRunTests();
+  if (!canRun) {
+    t.log(getSkipMessage());
+    t.pass('Skipped - validator not running');
+    return;
+  }
+
+  const rpc = createRpc();
+  const rpcSubscriptions = createRpcSubscriptions();
+  const masterMint = await createKeypair();
+  const masterOwner = await createKeypair();
+
+  await airdrop(rpc, masterOwner.address);
+
+  const createIx = await getCreateV1InstructionAsync({
+    mint: masterMint,
+    authority: masterOwner,
+    payer: masterOwner,
+    name: 'Master',
+    uri: 'https://example.com/master.json',
+    sellerFeeBasisPoints: basisPoints(0),
+    tokenStandard: TokenStandard.NonFungible,
+    printSupply: { __kind: 'Limited', fields: [10n] } as PrintSupply,
+  });
+  await sendAndConfirm(rpc, rpcSubscriptions, createIx, [masterMint, masterOwner]);
+
+  const [masterTokenAddress] = await findAssociatedTokenPda({
+    mint: masterMint.address,
+    owner: masterOwner.address,
+  });
+  const mintIx = await getMintV1InstructionAsync({
+    mint: masterMint.address,
+    authority: masterOwner,
+    payer: masterOwner,
+    token: masterTokenAddress,
+    tokenOwner: masterOwner.address,
+    tokenStandard: TokenStandard.NonFungible,
+    amount: 1n,
+  });
+  await sendAndConfirm(rpc, rpcSubscriptions, mintIx, [masterOwner]);
+
+  const editionMint = await createKeypair();
+  const editionOwner = await createKeypair();
+  await airdrop(rpc, editionOwner.address);
+
+  const printIx = await getPrintV1InstructionAsync({
+    masterEditionMint: masterMint.address,
+    masterTokenAccountOwner: masterOwner,
+    editionMint,
+    editionTokenAccountOwner: editionOwner.address,
+    editionNumber: 1n,
+    tokenStandard: TokenStandard.NonFungible,
+    payer: editionOwner,
+    updateAuthority: masterOwner.address,
+  });
+  await sendAndConfirm(rpc, rpcSubscriptions, printIx, [editionMint, editionOwner, masterOwner]);
+
+  const printed = await fetchDigitalAsset(rpc, editionMint.address);
+  t.truthy(printed.edition);
+  t.is(printed.edition?.isOriginal, false);
 });
