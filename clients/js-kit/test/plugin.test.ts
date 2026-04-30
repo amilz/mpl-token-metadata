@@ -130,6 +130,7 @@ test('plugin: createProgrammableNft + fetchDigitalAsset', async (t) => {
   const asset = await client.mplTokenMetadata.fetchDigitalAsset(mint.address);
   t.is(asset.address, mint.address);
   t.is(asset.metadata.name, 'Plugin PNFT');
+  t.is(asset.metadata.tokenStandard.__option, 'Some');
   if (asset.metadata.tokenStandard.__option === 'Some') {
     t.is(asset.metadata.tokenStandard.value, TokenStandard.ProgrammableNonFungible);
   }
